@@ -45,5 +45,19 @@ namespace InvoiceMakerTests.DataTests
             
             Assert.AreEqual(newData.Name, DataAccess.ClientsManager.GetClientById(1).Name);
         }
+
+        [Test]
+        public void RemoveClientTest()
+        {
+            DataAccess.ClientsManager.CreateClient("Test_0");
+            DataAccess.ClientsManager.CreateClient("Test_1");
+            DataAccess.ClientsManager.CreateClient("Test_2");
+            DataAccess.ClientsManager.CreateClient("Test_3");
+            
+            Assert.AreEqual(4, DataAccess.ClientsManager.GetAllClients().Count());
+            DataAccess.ClientsManager.RemoveClient(2);
+            Assert.AreEqual(3, DataAccess.ClientsManager.GetAllClients().Count());
+            Assert.IsEmpty(DataAccess.ClientsManager.GetClientsByName("Test_1"));
+        }
     }
 }

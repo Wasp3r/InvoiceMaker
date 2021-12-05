@@ -2,7 +2,7 @@
 
 namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
 {
-    public class BaseManager
+    public abstract class BaseManager
     {
         internal IDataBaseAccess _dataBase;
     }

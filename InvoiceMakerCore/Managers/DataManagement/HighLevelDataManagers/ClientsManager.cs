@@ -46,5 +46,13 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             client.Name = newClientData.Name;
             _dataBase.SaveChanges();
         }
+
+        public void RemoveClient(int clientId)
+        {
+            var clientToBeRemoved = GetClientById(clientId);
+            if (clientToBeRemoved == null) return;
+            _dataBase.Clients.Remove(clientToBeRemoved);
+            _dataBase.SaveChanges();
+        }
     }
 }
