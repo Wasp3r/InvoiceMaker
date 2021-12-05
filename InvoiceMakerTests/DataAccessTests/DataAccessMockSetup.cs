@@ -2,7 +2,7 @@
 using InvoiceMakerTests.MockHelpers;
 using NUnit.Framework;
 
-namespace InvoiceMakerTests.DataTests
+namespace InvoiceMakerTests.DataAccessTests
 {
     public class DataAccessMockSetup
     {
