@@ -2,15 +2,9 @@
 
 namespace InvoiceMakerCore.Models
 {
-    public class Product : BaseModel
+    public class ProductModel : DataBaseModel
     {
-        public int Id { get; }
         public string Name { get; set; }
         public float DefaultPrice { get; set; }
-
-        public Product(int id)
-        {
-            Id = id;
-        }
     }
 }

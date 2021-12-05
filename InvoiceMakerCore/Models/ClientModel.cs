@@ -4,15 +4,8 @@ using InvoiceMakerCore.Annotations;
 
 namespace InvoiceMakerCore.Models
 {
-    public class Client : BaseModel
+    public class ClientModel : DataBaseModel
     {
-        public int Id { get; }
-        
         public string Name { get; set; }
-
-        public Client(int id)
-        {
-            Id = id;
-        }
     }
 }
