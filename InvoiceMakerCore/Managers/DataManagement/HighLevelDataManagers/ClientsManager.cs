@@ -17,9 +17,9 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return new ClientsManager(dataBase);
         }
 
-        public void CreateClient(string name)
+        public void AddClient(ClientModel client)
         {
-            _dataBase.Clients.Add(new ClientModel() { Name = name });
+            _dataBase.Clients.Add(client);
             _dataBase.SaveChanges();
         }
         

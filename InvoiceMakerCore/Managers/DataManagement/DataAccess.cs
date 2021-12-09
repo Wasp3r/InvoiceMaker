@@ -8,11 +8,13 @@ namespace InvoiceMakerCore.Managers.DataManagement
         private IDataBaseAccess _dbAccess;
         
         public ClientsManager ClientsManager;
+        public ProductManager ProductsManager;
 
         public DataAccess(IDataBaseAccess dbAccess)
         {
             _dbAccess = dbAccess;
             ClientsManager = ClientsManager.CreateClientManager(dbAccess);
+            ProductsManager = ProductManager.CreateProductManager(dbAccess);
         }
     }
 }

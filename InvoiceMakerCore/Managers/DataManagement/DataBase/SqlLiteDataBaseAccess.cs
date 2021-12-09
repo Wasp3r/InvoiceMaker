@@ -40,6 +40,7 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
             Database.ExecuteSqlRaw(GetTableCreationCommand<CurrencyModel>(nameof(Currencies)));
             Database.ExecuteSqlRaw(GetTableCreationCommand<InvoiceModel>(nameof(Invoices)));
             Database.ExecuteSqlRaw(GetTableCreationCommand<InvoiceProductEntryModel>(nameof(InvoiceProductEntries)));
+            Database.ExecuteSqlRaw(GetTableCreationCommand<UnitModel>(nameof(Units)));
         }
 
         private string GetTableCreationCommand<T>(string propertyName) where T : DataBaseModel
@@ -52,9 +53,10 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
             foreach (var attribute in attributes)
             {
                 if (attribute.Name == "Id") continue;
-                stringBuilder.Append($", '{attribute.Name}' ");
                 var sqlType = _sqlTypeMap.FirstOrDefault(x => x.Key == attribute.PropertyType).Value;
-                stringBuilder.Append(string.IsNullOrEmpty(sqlType) ? "BLOB" : sqlType);
+                if (string.IsNullOrEmpty(sqlType)) continue;
+                stringBuilder.Append($", '{attribute.Name}' ");
+                stringBuilder.Append(sqlType);
             }
             stringBuilder.Append(")");
             

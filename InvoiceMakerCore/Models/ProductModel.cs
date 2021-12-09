@@ -6,5 +6,7 @@ namespace InvoiceMakerCore.Models
     {
         public string Name { get; set; }
         public float DefaultPrice { get; set; }
+        public int UnitId { get; set; }
+        public UnitModel Unit { get; set; }
     }
 }
