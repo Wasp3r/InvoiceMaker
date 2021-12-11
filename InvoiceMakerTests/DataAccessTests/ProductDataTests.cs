@@ -15,37 +15,37 @@ namespace InvoiceMakerTests.DataAccessTests
             for (var i = 0; i < number; i++)
             {
                 var newProduct = DataObjectsMock.MockProduct(i);
-                DataAccess.ProductsManager.AddProduct(newProduct);
-                Assert.NotNull(DataAccess.ProductsManager.GetProductByName(newProduct.Name));
+                DataAccess.ProductsManager.Add(newProduct);
+                Assert.NotNull(DataAccess.ProductsManager.GetByName(newProduct.Name));
             }
             
-            Assert.AreEqual(number, DataAccess.ProductsManager.GetAllProducts().Count());
+            Assert.AreEqual(number, DataAccess.ProductsManager.GetAll().Count());
         }
 
         [Test]
         public void UpdateProductTest()
         {
             var product = DataObjectsMock.MockProduct(1);
-            DataAccess.ProductsManager.AddProduct(product);
+            DataAccess.ProductsManager.Add(product);
             
             product.Name = "Updated";
             product.DefaultPrice = 2;
-            DataAccess.ProductsManager.UpdateProduct(1, product);
-            var updatedProduct = DataAccess.ProductsManager.GetProductById(1);
+            DataAccess.ProductsManager.Update(1, product);
+            var updatedProduct = DataAccess.ProductsManager.GetById(1);
             Assert.AreEqual(product, updatedProduct);
         }
 
         [Test]
         public void RemoveProductTest()
         {
-            DataAccess.ProductsManager.AddProduct(DataObjectsMock.MockProduct(0));
-            DataAccess.ProductsManager.AddProduct(DataObjectsMock.MockProduct(1));
-            DataAccess.ProductsManager.AddProduct(DataObjectsMock.MockProduct(2));
-            DataAccess.ProductsManager.AddProduct(DataObjectsMock.MockProduct(3));
+            DataAccess.ProductsManager.Add(DataObjectsMock.MockProduct(0));
+            DataAccess.ProductsManager.Add(DataObjectsMock.MockProduct(1));
+            DataAccess.ProductsManager.Add(DataObjectsMock.MockProduct(2));
+            DataAccess.ProductsManager.Add(DataObjectsMock.MockProduct(3));
             
-            Assert.AreEqual(4, DataAccess.ProductsManager.GetAllProducts().Count());
-            DataAccess.ProductsManager.RemoveProduct(2);
-            Assert.AreEqual(3, DataAccess.ProductsManager.GetAllProducts().Count());
+            Assert.AreEqual(4, DataAccess.ProductsManager.GetAll().Count());
+            DataAccess.ProductsManager.Remove(2);
+            Assert.AreEqual(3, DataAccess.ProductsManager.GetAll().Count());
             Assert.IsEmpty(DataAccess.ClientsManager.GetByName("Product_1"));
         }
     }

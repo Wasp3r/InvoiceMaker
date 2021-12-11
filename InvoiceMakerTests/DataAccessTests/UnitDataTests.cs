@@ -71,13 +71,13 @@ namespace InvoiceMakerTests.DataAccessTests
             
             var product = DataObjectsMock.MockProduct(0);
             product.Unit = unit_1;
-            DataAccess.ProductsManager.AddProduct(product);
+            DataAccess.ProductsManager.Add(product);
 
             Assert.AreEqual(2, DataAccess.UnitsManager.GetAll().Count());
             DataAccess.UnitsManager.Remove(2);
             Assert.IsEmpty(DataAccess.UnitsManager.GetByName("Unit_1"));
 
-            var loadedProduct = DataAccess.ProductsManager.GetProductById(1);
+            var loadedProduct = DataAccess.ProductsManager.GetById(1);
             Assert.AreEqual("NO_UNIT", loadedProduct.Unit.Name);
             
         }

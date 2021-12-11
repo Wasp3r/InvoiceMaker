@@ -5,7 +5,7 @@ using InvoiceMakerCore.Models;
 
 namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
 {
-    public class ProductManager : BaseManager
+    public class ProductManager : BaseManager, IBaseManager<ProductModel>
     {
         private ProductManager(IDataBaseAccess dataBase)
         {
@@ -17,30 +17,30 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return new ProductManager(dataBase);
         }
 
-        public void AddProduct(ProductModel newProduct)
+        public void Add(ProductModel newProduct)
         {
             _dataBase.Products.Add(newProduct);
             _dataBase.SaveChanges();
         }
 
-        public ProductModel GetProductByName(string name)
-        {
-            return _dataBase.Products.FirstOrDefault(x => x.Name == name);
-        }
-
-        public ProductModel GetProductById(int productId)
+        public ProductModel GetById(int productId)
         {
             return _dataBase.Products.FirstOrDefault(x => x.Id == productId);
         }
 
-        public IEnumerable<ProductModel> GetAllProducts()
+        public ProductModel GetByName(string name)
+        {
+            return _dataBase.Products.FirstOrDefault(x => x.Name == name);
+        }
+
+        public IEnumerable<ProductModel> GetAll()
         {
             return _dataBase.Products;
         }
 
-        public void UpdateProduct(int productId, ProductModel newProductData)
+        public void Update(int productId, ProductModel newProductData)
         {
-            var product = GetProductById(productId);
+            var product = GetById(productId);
             if (product == null) return;
 
             product.Name = newProductData.Name;
@@ -48,9 +48,9 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             _dataBase.SaveChanges();
         }
 
-        public void RemoveProduct(int productId)
+        public void Remove(int productId)
         {
-            var productToBeRemoved = GetProductById(productId);
+            var productToBeRemoved = GetById(productId);
             if (productToBeRemoved == null) return;
             _dataBase.Products.Remove(productToBeRemoved);
             _dataBase.SaveChanges();
