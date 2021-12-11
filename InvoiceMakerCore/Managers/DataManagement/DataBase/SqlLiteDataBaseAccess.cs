@@ -19,7 +19,8 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
             {typeof(int), "INTEGER"},
             {typeof(int?), "INTEGER"},
             {typeof(float), "REAL"},
-            {typeof(double), "REAL"}
+            {typeof(double), "REAL"},
+            {typeof(DateTime), "TEXT"}
         };
 
         public override void Connect(string connectionString)
