@@ -5,7 +5,7 @@ using InvoiceMakerCore.Models;
 
 namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
 {
-    public class ClientsManager : BaseManager
+    public class ClientsManager : BaseManager, IBaseManager<ClientModel>
     {
         private ClientsManager(IDataBaseAccess dataBase)
         {
@@ -17,39 +17,39 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return new ClientsManager(dataBase);
         }
 
-        public void AddClient(ClientModel client)
+        public void Add(ClientModel client)
         {
             _dataBase.Clients.Add(client);
             _dataBase.SaveChanges();
         }
-        
-        public ClientModel GetClientById(int id)
+
+        public ClientModel GetById(int id)
         {
             return _dataBase.Clients.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<ClientModel> GetClientsByName(string name)
+        public IEnumerable<ClientModel> GetByName(string name)
         {
             return _dataBase.Clients.Where(x => x.Name == name);
         }
 
-        public IEnumerable<ClientModel> GetAllClients()
+        public IEnumerable<ClientModel> GetAll()
         {
             return _dataBase.Clients;
         }
 
-        public void UpdateClient(int clientId, ClientModel newClientData)
+        public void Update(int clientId, ClientModel newClientData)
         {
-            var client = GetClientById(clientId);
+            var client = GetById(clientId);
             if (client == null) return;
 
             client.Name = newClientData.Name;
             _dataBase.SaveChanges();
         }
 
-        public void RemoveClient(int clientId)
+        public void Remove(int clientId)
         {
-            var clientToBeRemoved = GetClientById(clientId);
+            var clientToBeRemoved = GetById(clientId);
             if (clientToBeRemoved == null) return;
             _dataBase.Clients.Remove(clientToBeRemoved);
             _dataBase.SaveChanges();

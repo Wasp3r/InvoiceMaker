@@ -13,11 +13,11 @@ namespace InvoiceMakerTests.DataAccessTests
         {
             for (var i = 0; i < number; i++)
             {
-                DataAccess.ClientsManager.AddClient(MockClient(i));
-                Assert.AreEqual(1, DataAccess.ClientsManager.GetClientsByName($"Test_{i}").Count());
+                DataAccess.ClientsManager.Add(MockClient(i));
+                Assert.AreEqual(1, DataAccess.ClientsManager.GetByName($"Test_{i}").Count());
             }
             
-            Assert.AreEqual(number, DataAccess.ClientsManager.GetAllClients().Count());
+            Assert.AreEqual(number, DataAccess.ClientsManager.GetAll().Count());
         }
 
         [TestCase(1)]
@@ -26,12 +26,12 @@ namespace InvoiceMakerTests.DataAccessTests
         {
             for (var i = 0; i < number; i++)
             {
-                DataAccess.ClientsManager.AddClient(MockClient(i));
+                DataAccess.ClientsManager.Add(MockClient(i));
             }
 
             for (var i = 1; i < number +1; i++)
             {
-                var client = DataAccess.ClientsManager.GetClientById(i);
+                var client = DataAccess.ClientsManager.GetById(i);
                 Assert.NotNull(client);
                 Assert.AreEqual($"Test_{i - 1}", client.Name);
             }
@@ -40,25 +40,25 @@ namespace InvoiceMakerTests.DataAccessTests
         [Test]
         public void UpdateClientTest()
         {
-            DataAccess.ClientsManager.AddClient(MockClient(0));
+            DataAccess.ClientsManager.Add(MockClient(0));
             var newData = new ClientModel() { Name = "UpdatedClient" };
-            DataAccess.ClientsManager.UpdateClient(1, newData);
+            DataAccess.ClientsManager.Update(1, newData);
             
-            Assert.AreEqual(newData.Name, DataAccess.ClientsManager.GetClientById(1).Name);
+            Assert.AreEqual(newData.Name, DataAccess.ClientsManager.GetById(1).Name);
         }
 
         [Test]
         public void RemoveClientTest()
         {
-            DataAccess.ClientsManager.AddClient(MockClient(0));
-            DataAccess.ClientsManager.AddClient(MockClient(1));
-            DataAccess.ClientsManager.AddClient(MockClient(2));
-            DataAccess.ClientsManager.AddClient(MockClient(3));
+            DataAccess.ClientsManager.Add(MockClient(0));
+            DataAccess.ClientsManager.Add(MockClient(1));
+            DataAccess.ClientsManager.Add(MockClient(2));
+            DataAccess.ClientsManager.Add(MockClient(3));
 
-            Assert.AreEqual(4, DataAccess.ClientsManager.GetAllClients().Count());
-            DataAccess.ClientsManager.RemoveClient(2);
-            Assert.AreEqual(3, DataAccess.ClientsManager.GetAllClients().Count());
-            Assert.IsEmpty(DataAccess.ClientsManager.GetClientsByName("Test_1"));
+            Assert.AreEqual(4, DataAccess.ClientsManager.GetAll().Count());
+            DataAccess.ClientsManager.Remove(2);
+            Assert.AreEqual(3, DataAccess.ClientsManager.GetAll().Count());
+            Assert.IsEmpty(DataAccess.ClientsManager.GetByName("Test_1"));
         }
 
         private ClientModel MockClient(int number)

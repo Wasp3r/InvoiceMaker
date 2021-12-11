@@ -17,6 +17,7 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
         {
             {typeof(string), "TEXT"},
             {typeof(int), "INTEGER"},
+            {typeof(int?), "INTEGER"},
             {typeof(float), "REAL"},
             {typeof(double), "REAL"}
         };
@@ -61,6 +62,14 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
             stringBuilder.Append(")");
             
             return stringBuilder.ToString();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductModel>()
+                .HasOne(prod => prod.Unit)
+                .WithMany(x => x.Products)
+                .Metadata.DeleteBehavior = DeleteBehavior.Restrict;
         }
     }
 }

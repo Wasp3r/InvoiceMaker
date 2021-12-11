@@ -18,7 +18,6 @@ namespace InvoiceMakerCore.Annotations.Builders
         
         public ProductBuilder AddUnit(UnitModel unit)
         {
-            _result.UnitId = unit.Id;
             _result.Unit = unit;
             return this;
         }

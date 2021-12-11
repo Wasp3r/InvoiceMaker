@@ -5,10 +5,11 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
 {
     public interface IDataBaseAccess
     {
-        public DbSet<ClientModel> Clients { get; set; }
-        public DbSet<ProductModel> Products { get; set; }
-        public DbSet<InvoiceModel> Invoices { get; set; }
-        public DbSet<CurrencyModel> Currencies { get; set; }
+        public DbSet<ClientModel> Clients { get; }
+        public DbSet<ProductModel> Products { get; }
+        public DbSet<InvoiceModel> Invoices { get; }
+        public DbSet<CurrencyModel> Currencies { get; }
+        public DbSet<UnitModel> Units { get; }
 
         public void Connect(string connectionString);
 

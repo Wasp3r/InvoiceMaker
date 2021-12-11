@@ -9,12 +9,14 @@ namespace InvoiceMakerCore.Managers.DataManagement
         
         public ClientsManager ClientsManager;
         public ProductManager ProductsManager;
+        public UnitsManager UnitsManager;
 
         public DataAccess(IDataBaseAccess dbAccess)
         {
             _dbAccess = dbAccess;
             ClientsManager = ClientsManager.CreateClientManager(dbAccess);
             ProductsManager = ProductManager.CreateProductManager(dbAccess);
+            UnitsManager = UnitsManager.CreateUnitManager(dbAccess);
         }
     }
 }
