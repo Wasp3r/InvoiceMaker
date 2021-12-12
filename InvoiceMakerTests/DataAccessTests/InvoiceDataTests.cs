@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Models;
 using InvoiceMakerTests.MockHelpers;
 using NUnit.Framework;
@@ -12,21 +13,18 @@ namespace InvoiceMakerTests.DataAccessTests
         [TestCase(5)]
         public void CreateInvoicesTest(int number)
         {
-            var mockedProducts = CreateProducts(5);
+            var mockedProducts = DataObjectsMock.MockProducts(5, DataAccess.ProductsManager);
             for (var i = 0; i < number; i++)
             {
                 var client = DataObjectsMock.MockClient(i);
                 DataAccess.ClientsManager.Add(client);
                 
                 var invoice = DataObjectsMock.MockInvoice(client, i);
-                invoice.Products = new List<InvoiceProductEntryModel>()
-                {
-                    DataObjectsMock.MockInvoiceEntry(mockedProducts[0], 1),
-                    DataObjectsMock.MockInvoiceEntry(mockedProducts[1], 2),
-                    DataObjectsMock.MockInvoiceEntry(mockedProducts[2], 3),
-                    DataObjectsMock.MockInvoiceEntry(mockedProducts[3], 4),
-                    DataObjectsMock.MockInvoiceEntry(mockedProducts[4], 5),
-                };
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(mockedProducts[0], 1));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(mockedProducts[1], 2));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(mockedProducts[2], 3));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(mockedProducts[3], 4));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(mockedProducts[4], 5));
 
                 DataAccess.InvoiceManager.Add(invoice);
 
@@ -41,19 +39,42 @@ namespace InvoiceMakerTests.DataAccessTests
             Assert.AreEqual(number, DataAccess.ClientsManager.GetAll().Count());
             Assert.AreEqual(5, DataAccess.ProductsManager.GetAll().Count());
         }
-        
-        private List<ProductModel> CreateProducts(int productsNumber)
+
+        [Test]
+        public void CreateMultipleInvoicesToOneClientTest()
         {
-            var products = new List<ProductModel>();
+            var client = DataObjectsMock.MockClient(1);
+            var products = DataObjectsMock.MockProducts(3, DataAccess.ProductsManager);
 
-            for (var i = 0; i < productsNumber; i++)
+            for (var i = 0; i < 3; i++)
             {
-                var product = DataObjectsMock.MockProduct(i);
-                DataAccess.ProductsManager.Add(product);
-                products.Add(product);
-            }
+                var invoice = DataObjectsMock.MockInvoice(client, i);
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[0], i));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[1], i));
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[2], i));
 
-            return products;
+                DataAccess.InvoiceManager.Add(invoice);
+            }
+            
+            Assert.AreEqual(3, DataAccess.InvoiceManager.GetAll().Count(x => x.Client.Id == 1));
+        }
+
+        [TestCase(1)]
+        [TestCase(5)]
+        public void CheckInvoiceSumTest(int number)
+        {
+            var products = DataObjectsMock.MockProducts(number, DataAccess.ProductsManager);
+            var client = DataObjectsMock.MockClient(0);
+
+            var invoice = DataObjectsMock.MockInvoice(client, 0);
+            foreach (var product in products)
+            {
+                invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(product, 2));
+            }
+            DataAccess.InvoiceManager.Add(invoice);
+            var dbInvoice = DataAccess.InvoiceManager.GetById(1);
+            
+            Assert.AreEqual(4 * number, DataAccess.InvoiceManager.GetInvoiceSum(dbInvoice));
         }
     }
 }

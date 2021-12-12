@@ -42,5 +42,10 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
         {
             throw new System.NotImplementedException();
         }
+
+        public float GetInvoiceSum(InvoiceModel invoice)
+        {
+            return invoice.Products.Sum(x => x.Quantity * x.PricePerUnit);
+        }
     }
 }

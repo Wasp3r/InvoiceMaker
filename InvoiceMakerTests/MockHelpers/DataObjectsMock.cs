@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using InvoiceMakerCore.Annotations.Builders;
+using InvoiceMakerCore.Managers.DataManagement;
+using InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers;
 using InvoiceMakerCore.Models;
 
 namespace InvoiceMakerTests.MockHelpers
@@ -13,6 +16,20 @@ namespace InvoiceMakerTests.MockHelpers
                 .AddDefaultPrice(number)
                 .AddUnit(MockUnit(0))
                 .Build();
+        }
+        
+        public static List<ProductModel> MockProducts(int productsNumber, ProductManager manager)
+        {
+            var products = new List<ProductModel>();
+
+            for (var i = 0; i < productsNumber; i++)
+            {
+                var product = MockProduct(i);
+                manager.Add(product);
+                products.Add(product);
+            }
+
+            return products;
         }
 
         public static UnitModel MockUnit(int number)

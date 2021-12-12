@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InvoiceMakerCore.Annotations;
 
@@ -15,5 +16,6 @@ namespace InvoiceMakerCore.Models
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string NIP { get; set; }
+        public List<InvoiceModel> Invoices { get; set; }
     }
 }
