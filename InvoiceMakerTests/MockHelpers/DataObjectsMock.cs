@@ -1,4 +1,5 @@
-﻿using InvoiceMakerCore.Annotations.Builders;
+﻿using System;
+using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Models;
 
 namespace InvoiceMakerTests.MockHelpers
@@ -18,6 +19,30 @@ namespace InvoiceMakerTests.MockHelpers
         {
             return new UnitBuilder()
                 .AddName($"Unit_{number}")
+                .Build();
+        }
+        
+        public static ClientModel MockClient(int number)
+        {
+            return new ClientBuilder()
+                .AddName($"Test_{number}")
+                .Build();
+        }
+
+        public static InvoiceModel MockInvoice(ClientModel client, int number)
+        {
+            return new InvoiceBuilder(client)
+                .AddCreationDate(DateTime.Today)
+                .AddPaymentTerm(DateTime.Today.AddDays(5))
+                .AddPaymentDate(DateTime.Today.AddDays(4))
+                .Build();
+        }
+
+        public static InvoiceProductEntryModel MockInvoiceEntry(ProductModel product, int number)
+        {
+            return new InvoiceEntryBuilder(product)
+                .AddQuantity(number)
+                .AddPricePreUnit(number)
                 .Build();
         }
     }

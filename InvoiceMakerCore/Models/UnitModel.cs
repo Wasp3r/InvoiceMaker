@@ -7,6 +7,6 @@ namespace InvoiceMakerCore.Models
     {
         public string Name { get; set; }
         
-        public Collection<ProductModel> Products { get; set; }
+        public Collection<ProductModel> Products { get; }
     }
 }
