@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
 using InvoiceMakerCore.Models;
@@ -38,20 +39,17 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return _dataBase.Products;
         }
 
-        public void Update(int productId, ProductModel newProductData)
-        {
-            var product = GetById(productId);
-            if (product == null) return;
-
-            product.Name = newProductData.Name;
-            product.DefaultPrice = newProductData.DefaultPrice;
-            _dataBase.SaveChanges();
-        }
-
         public void Remove(int productId)
         {
             var productToBeRemoved = GetById(productId);
             if (productToBeRemoved == null) return;
+
+            if (productToBeRemoved.InvoiceEntries.Any())
+            {
+                throw new ReadOnlyException($"This product is used in {productToBeRemoved.InvoiceEntries.Count} invoices. " +
+                                            $"Please first remove it from existing invoices.");
+            }
+            
             _dataBase.Products.Remove(productToBeRemoved);
             _dataBase.SaveChanges();
         }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Models;
 using InvoiceMakerTests.MockHelpers;
@@ -15,7 +16,7 @@ namespace InvoiceMakerTests.DataAccessTests
             for (var i = 0; i < number; i++)
             {
                 DataAccess.ClientsManager.Add(DataObjectsMock.MockClient(i));
-                Assert.AreEqual(1, DataAccess.ClientsManager.GetByName($"Test_{i}").Count());
+                Assert.AreEqual(1, DataAccess.ClientsManager.GetByName($"Client_{i}").Count());
             }
             
             Assert.AreEqual(number, DataAccess.ClientsManager.GetAll().Count());
@@ -34,18 +35,21 @@ namespace InvoiceMakerTests.DataAccessTests
             {
                 var client = DataAccess.ClientsManager.GetById(i);
                 Assert.NotNull(client);
-                Assert.AreEqual($"Test_{i - 1}", client.Name);
+                Assert.AreEqual($"Client_{i - 1}", client.Name);
             }
         }
 
         [Test]
         public void UpdateClientTest()
         {
-            DataAccess.ClientsManager.Add(DataObjectsMock.MockClient(0));
-            var newData = new ClientModel() { Name = "UpdatedClient" };
-            DataAccess.ClientsManager.Update(1, newData);
+            var client = DataObjectsMock.MockClient(0);
+            DataAccess.ClientsManager.Add(client);
             
-            Assert.AreEqual(newData.Name, DataAccess.ClientsManager.GetById(1).Name);
+            Assert.AreEqual("Client_0", client.Name);
+            client.Name = "Updated Client";
+            DataAccess.SaveChanges();
+            
+            Assert.AreEqual("Updated Client", DataAccess.ClientsManager.GetById(1).Name);
         }
 
         [Test]
@@ -73,7 +77,7 @@ namespace InvoiceMakerTests.DataAccessTests
             Assert.AreEqual(4, DataAccess.ClientsManager.GetAll().Count());
             DataAccess.ClientsManager.Remove(2);
             Assert.AreEqual(3, DataAccess.ClientsManager.GetAll().Count());
-            Assert.IsEmpty(DataAccess.ClientsManager.GetByName("Test_1"));
+            Assert.IsEmpty(DataAccess.ClientsManager.GetByName("Client_1"));
             Assert.AreEqual(1, DataAccess.InvoiceManager.GetAll().Count());
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using InvoiceMakerCore.Annotations.Builders;
 
@@ -11,5 +12,6 @@ namespace InvoiceMakerCore.Models
         public int? UnitId { get; set; }
 
         public UnitModel Unit { get; set; }
+        public List<InvoiceProductEntryModel> InvoiceEntries { get; set; } = new();
     }
 }

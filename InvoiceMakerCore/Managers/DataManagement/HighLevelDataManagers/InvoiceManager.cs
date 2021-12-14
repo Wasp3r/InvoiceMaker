@@ -33,14 +33,13 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return _dataBase.Invoices;
         }
 
-        public void Update(int id, InvoiceModel newData)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Remove(int id)
         {
-            throw new System.NotImplementedException();
+            var invoiceToBeRemoved = GetById(id);
+            if (invoiceToBeRemoved == null) return;
+
+            _dataBase.Invoices.Remove(invoiceToBeRemoved);
+            _dataBase.SaveChanges();
         }
 
         public float GetInvoiceSum(InvoiceModel invoice)

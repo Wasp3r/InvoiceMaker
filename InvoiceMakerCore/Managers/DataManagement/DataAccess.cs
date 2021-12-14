@@ -20,5 +20,10 @@ namespace InvoiceMakerCore.Managers.DataManagement
             UnitsManager = UnitsManager.CreateUnitManager(dbAccess);
             InvoiceManager = InvoiceManager.CreateClientManager(dbAccess);
         }
+
+        public void SaveChanges()
+        {
+            _dbAccess.SaveChanges();
+        }
     }
 }

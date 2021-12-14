@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
 using InvoiceMakerCore.Models;
+using InvoiceMakerCore.Models.Base;
 
 namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
 {
@@ -11,8 +12,6 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
         public T GetById(int id);
 
         public IEnumerable<T> GetAll();
-
-        public void Update(int id, T newData);
 
         public void Remove(int id);
     }

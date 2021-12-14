@@ -42,7 +42,7 @@ namespace InvoiceMakerTests.MockHelpers
         public static ClientModel MockClient(int number)
         {
             return new ClientBuilder()
-                .AddName($"Test_{number}")
+                .AddName($"Client_{number}")
                 .Build();
         }
 

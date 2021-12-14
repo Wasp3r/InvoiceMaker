@@ -54,11 +54,14 @@ namespace InvoiceMakerTests.DataAccessTests
         [Test]
         public void UpdateUnitTest()
         {
-            DataAccess.UnitsManager.Add(DataObjectsMock.MockUnit(0));
-            var newData = DataObjectsMock.MockUnit(1);
-            DataAccess.UnitsManager.Update(1, newData);
+            var unit = DataObjectsMock.MockUnit(0);
+            DataAccess.UnitsManager.Add(unit);
             
-            Assert.AreEqual(newData.Name, DataAccess.UnitsManager.GetById(1).Name);
+            Assert.AreEqual("Unit_0", unit.Name);
+            unit.Name = "Updated Unit";
+            DataAccess.SaveChanges();
+            
+            Assert.AreEqual("Updated Unit", DataAccess.UnitsManager.GetById(1).Name);
         }
         
         [Test]

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using InvoiceMakerCore.Annotations;
 
-namespace InvoiceMakerCore.Models
+namespace InvoiceMakerCore.Models.Base
 {
     public abstract class BaseModel : INotifyPropertyChanged
     {

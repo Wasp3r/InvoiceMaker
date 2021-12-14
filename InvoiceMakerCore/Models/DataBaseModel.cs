@@ -1,4 +1,6 @@
-﻿namespace InvoiceMakerCore.Models
+﻿using InvoiceMakerCore.Models.Base;
+
+namespace InvoiceMakerCore.Models
 {
     public class DataBaseModel : BaseModel
     {

@@ -41,15 +41,6 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
             return _dataBase.Units;
         }
 
-        public void Update(int id, UnitModel newData)
-        {
-            var unit = GetById(id);
-            if (unit == null) return;
-
-            unit.Name = newData.Name;
-            _dataBase.SaveChanges();
-        }
-
         public void Remove(int id)
         {
             var unitToBeRemoved = GetById(id);
