@@ -11,6 +11,7 @@ namespace InvoiceMakerCore.Managers.DataManagement
         public ProductManager ProductsManager;
         public UnitsManager UnitsManager;
         public InvoiceManager InvoiceManager;
+        public CurrencyManager CurrencyManager;
 
         public DataAccess(IDataBaseAccess dbAccess)
         {
@@ -19,6 +20,7 @@ namespace InvoiceMakerCore.Managers.DataManagement
             ProductsManager = ProductManager.CreateProductManager(dbAccess);
             UnitsManager = UnitsManager.CreateUnitManager(dbAccess);
             InvoiceManager = InvoiceManager.CreateClientManager(dbAccess);
+            CurrencyManager = CurrencyManager.CreateCurrencyManager(dbAccess);
         }
 
         public void SaveChanges()

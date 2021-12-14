@@ -62,5 +62,12 @@ namespace InvoiceMakerTests.MockHelpers
                 .AddPricePreUnit(number)
                 .Build();
         }
+
+        public static CurrencyModel MockCurrency(int i)
+        {
+            return new CurrencyBuilder()
+                .AddName($"Currency_{i}")
+                .Build();
+        }
     }
 }
