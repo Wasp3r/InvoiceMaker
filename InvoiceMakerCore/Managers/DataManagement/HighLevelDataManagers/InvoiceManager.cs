@@ -20,6 +20,8 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
         
         public void Add(InvoiceModel target)
         {
+            var invoices = GetAll().Where(x => x.CreationDate.Year == DateTime.Today.Year);
+            target.Number = $"{DateTime.Today.Year}/{invoices.Count()+1}";
             _dataBase.Invoices.Add(target);
             _dataBase.SaveChanges();
         }

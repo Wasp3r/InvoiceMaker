@@ -33,6 +33,7 @@ namespace InvoiceMakerTests.DataAccessTests
                 Assert.NotNull(createdInvoice);
                 Assert.AreEqual(5, createdInvoice.Products.Count);
                 Assert.AreEqual(5, DataAccess.ProductsManager.GetAll().Count());
+                Assert.AreEqual($"{DateTime.Today.Year}/{i+1}", DataAccess.InvoiceManager.GetById(i+1).Number);
             }
             
             Assert.IsNotEmpty(DataAccess.InvoiceManager.GetAll());
