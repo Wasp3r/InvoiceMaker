@@ -7,7 +7,7 @@ namespace InvoiceMakerTests.MockHelpers
 {
     public static class SqlLiteMock
     {
-        public static IContainer Container;
+        private static IContainer _container;
         
         public static void SetupContainer()
         {
@@ -18,20 +18,18 @@ namespace InvoiceMakerTests.MockHelpers
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
             builder.RegisterType<DataAccess>().AsSelf();
-            Container = builder.Build();
-            Container.Resolve<IDataBaseAccess>().Connect($"{TestPathUtils.TempPath}\\test.db");
+            _container = builder.Build();
+            _container.Resolve<IDataBaseAccess>().Connect($"{TestPathUtils.TempPath}\\test.db");
         }
 
         public static DataAccess GetDataAccess()
         {
-            using var scope = Container.BeginLifetimeScope();
-            return Container.Resolve<DataAccess>();
+            return _container.Resolve<DataAccess>();
         }
 
         public static IDataBaseAccess GetDataBase()
         {
-            using var scope = Container.BeginLifetimeScope();
-            return Container.Resolve<IDataBaseAccess>();
+            return _container.Resolve<IDataBaseAccess>();
         }
 
         public static void CleanUp()
