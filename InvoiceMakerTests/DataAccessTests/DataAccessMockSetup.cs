@@ -11,8 +11,8 @@ namespace InvoiceMakerTests.DataAccessTests
         [SetUp]
         public void Setup()
         {
-            var db = SqlLiteMock.SetupDataBase();
-            DataAccess = new DataAccess(db);
+            SqlLiteMock.SetupContainer();
+            DataAccess = SqlLiteMock.GetDataAccess();
         }
 
         [OneTimeTearDown]
