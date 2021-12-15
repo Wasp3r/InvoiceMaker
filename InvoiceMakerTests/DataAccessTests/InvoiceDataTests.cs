@@ -87,6 +87,23 @@ namespace InvoiceMakerTests.DataAccessTests
             Assert.IsEmpty(client_0.Invoices);
         }
 
+        [Test]
+        public void RemoveInvoiceTest()
+        {
+            var products = DataObjectsMock.MockProducts(3, DataAccess.ProductsManager);
+            var invoice = DataObjectsMock.MockInvoice(DataObjectsMock.MockClient(0), 0);
+            invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[0], 1));
+            invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[1], 1));
+            invoice.Products.Add(DataObjectsMock.MockInvoiceEntry(products[2], 1));
+            
+            DataAccess.InvoiceManager.Add(invoice);
+            Assert.NotNull(DataAccess.InvoiceManager.GetById(1));
+            DataAccess.InvoiceManager.Remove(1);
+            Assert.Null(DataAccess.InvoiceManager.GetById(1));
+            Assert.AreEqual(3, DataAccess.ProductsManager.GetAll().Count());
+            Assert.AreEqual(1, DataAccess.CurrencyManager.GetAll().Count());
+        }
+
         [TestCase(1)]
         [TestCase(5)]
         public void CheckInvoiceSumTest(int number)

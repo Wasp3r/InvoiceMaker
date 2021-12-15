@@ -34,7 +34,7 @@ namespace InvoiceMakerCore.Annotations.Builders
             return this;
         }
 
-        public InvoiceBuilder SetCurrency(CurrencyModel currency)
+        public InvoiceBuilder AddCurrency(CurrencyModel currency)
         {
             _result.CurrencyModel = currency;
             return this;

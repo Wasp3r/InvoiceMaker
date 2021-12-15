@@ -52,6 +52,7 @@ namespace InvoiceMakerTests.MockHelpers
                 .AddCreationDate(DateTime.Today)
                 .AddPaymentTerm(DateTime.Today.AddDays(5))
                 .AddPaymentDate(DateTime.Today.AddDays(4))
+                .AddCurrency(MockCurrency(number))
                 .Build();
         }
 
