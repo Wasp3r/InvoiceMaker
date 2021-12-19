@@ -72,7 +72,9 @@ namespace InvoiceMakerTests.SqlLite
                     CreationDate = DateTime.Today.AddDays(i),
                     PaymentTerm = DateTime.Today.AddDays(i+1),
                     PaymentDate = DateTime.Today.AddDays(i+2),
-                    CurrencyModel = new CurrencyModel()
+                    CurrencyModel = new CurrencyModel(),
+                    Client = new ClientModel(),
+                    Products = { new InvoiceProductEntryModel() }
                 });
                 DataBaseAccess.SaveChanges();
                 var product = DataBaseAccess.Invoices.FirstOrDefault(x => x.Number == $"Invoice_{i}");

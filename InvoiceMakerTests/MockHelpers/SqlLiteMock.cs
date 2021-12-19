@@ -15,9 +15,9 @@ namespace InvoiceMakerTests.MockHelpers
             var builder = new ContainerBuilder();
             builder.RegisterType<SqlLiteDataBaseAccess>()
                 .As<IDataBaseAccess>()
-                .AsImplementedInterfaces()
-                .InstancePerLifetimeScope();
+                .SingleInstance();
             builder.RegisterType<DataAccess>().AsSelf();
+            
             _container = builder.Build();
             _container.Resolve<IDataBaseAccess>().Connect($"{TestPathUtils.TempPath}\\test.db");
         }
