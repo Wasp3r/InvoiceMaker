@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Managers.DataManagement;
 using InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers;
 using InvoiceMakerCore.Models;
@@ -11,11 +10,12 @@ namespace InvoiceMakerTests.MockHelpers
     {
         public static ProductModel MockProduct(int number)
         {
-            return new ProductBuilder()
-                .AddName($"Product_{number}")
-                .AddDefaultPrice(number)
-                .AddUnit(MockUnit(0))
-                .Build();
+            return new ProductModel
+                {
+                    Name = $"Product_{number}",
+                    DefaultPrice = number,
+                    Unit = MockUnit(0)
+                };
         }
         
         public static List<ProductModel> MockProducts(int productsNumber, ProductManager manager)
@@ -34,41 +34,42 @@ namespace InvoiceMakerTests.MockHelpers
 
         public static UnitModel MockUnit(int number)
         {
-            return new UnitBuilder()
-                .AddName($"Unit_{number}")
-                .Build();
+            return new UnitModel($"Unit_{number}");
         }
         
         public static ClientModel MockClient(int number)
         {
-            return new ClientBuilder()
-                .AddName($"Client_{number}")
-                .Build();
+            return new ClientModel()
+            {
+                Name = $"Client_{number}"
+            };
         }
 
         public static InvoiceModel MockInvoice(ClientModel client, int number)
         {
-            return new InvoiceBuilder(client)
-                .AddCreationDate(DateTime.Today)
-                .AddPaymentTerm(DateTime.Today.AddDays(5))
-                .AddPaymentDate(DateTime.Today.AddDays(4))
-                .AddCurrency(MockCurrency(number))
-                .Build();
+            return new InvoiceModel()
+            {
+                Client = client,
+                CreationDate = DateTime.Today,
+                PaymentTerm = DateTime.Today.AddDays(5),
+                PaymentDate = DateTime.Today.AddDays(4),
+                CurrencyModel = MockCurrency(number)
+            };
         }
 
         public static InvoiceProductEntryModel MockInvoiceEntry(ProductModel product, int number)
         {
-            return new InvoiceEntryBuilder(product)
-                .AddQuantity(number)
-                .AddPricePreUnit(number)
-                .Build();
+            return new InvoiceProductEntryModel()
+            {
+                Product = product,
+                Quantity = number,
+                PricePerUnit = number
+            };
         }
 
         public static CurrencyModel MockCurrency(int i)
         {
-            return new CurrencyBuilder()
-                .AddName($"Currency_{i}")
-                .Build();
+            return new CurrencyModel($"Currency_{i}");
         }
     }
 }

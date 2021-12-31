@@ -48,10 +48,7 @@ namespace InvoiceMakerTests.SqlLite
         {
             for (var i = 0; i < number; i++)
             {
-                DataBaseAccess.Currencies.Add(new CurrencyModel()
-                {
-                    Name = $"Currency_{i}"
-                });
+                DataBaseAccess.Currencies.Add(new CurrencyModel($"Currency_{i}"));
                 DataBaseAccess.SaveChanges();
                 var product = DataBaseAccess.Currencies.FirstOrDefault(x => x.Name == $"Currency_{i}");
                 Assert.NotNull(product);
@@ -72,7 +69,7 @@ namespace InvoiceMakerTests.SqlLite
                     CreationDate = DateTime.Today.AddDays(i),
                     PaymentTerm = DateTime.Today.AddDays(i+1),
                     PaymentDate = DateTime.Today.AddDays(i+2),
-                    CurrencyModel = new CurrencyModel(),
+                    CurrencyModel = new CurrencyModel("TestCurrency"),
                     Client = new ClientModel(),
                     Products = { new InvoiceProductEntryModel() }
                 });

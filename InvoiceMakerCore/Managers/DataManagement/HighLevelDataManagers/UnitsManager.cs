@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
 using InvoiceMakerCore.Models;
 
@@ -58,9 +57,7 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
 
         private UnitModel GetEmptyUnit()
         {
-            return new UnitBuilder()
-                .AddName("NO_UNIT")
-                .Build();
+            return new UnitModel("NO_UNIT");
         }
     }
 }

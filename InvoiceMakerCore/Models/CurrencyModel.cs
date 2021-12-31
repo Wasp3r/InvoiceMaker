@@ -7,5 +7,10 @@ namespace InvoiceMakerCore.Models
         public string Name { get; set; }
 
         public List<InvoiceModel> Invoices { get; set; } = new();
+
+        public CurrencyModel(string name)
+        {
+            Name = name;
+        }
     }
 }

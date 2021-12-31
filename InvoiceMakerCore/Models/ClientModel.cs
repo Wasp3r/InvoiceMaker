@@ -16,6 +16,6 @@ namespace InvoiceMakerCore.Models
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string NIP { get; set; }
-        public List<InvoiceModel> Invoices { get; set; }
+        public List<InvoiceModel> Invoices { get; set; } = new();
     }
 }

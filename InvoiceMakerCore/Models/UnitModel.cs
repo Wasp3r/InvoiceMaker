@@ -6,7 +6,12 @@ namespace InvoiceMakerCore.Models
     public class UnitModel : DataBaseModel
     {
         public string Name { get; set; }
-        
-        public Collection<ProductModel> Products { get; }
+
+        public Collection<ProductModel> Products { get; } = new();
+
+        public UnitModel(string name)
+        {
+            Name = name;
+        }
     }
 }

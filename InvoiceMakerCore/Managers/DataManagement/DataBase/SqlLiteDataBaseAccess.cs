@@ -16,7 +16,6 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
         public override void Connect(string connectionString)
         {
             _dbPath = connectionString;
-            if (File.Exists(_dbPath)) return;
             Database.EnsureCreated();
         }
 

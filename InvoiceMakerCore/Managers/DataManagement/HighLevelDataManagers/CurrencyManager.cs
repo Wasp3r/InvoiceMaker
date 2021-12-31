@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
 using InvoiceMakerCore.Models;
 
@@ -56,9 +55,7 @@ namespace InvoiceMakerCore.Managers.DataManagement.HighLevelDataManagers
         
         private CurrencyModel GetEmptyCurrency()
         {
-            return new CurrencyBuilder()
-                .AddName("NO_CURRENCY")
-                .Build();
+            return new CurrencyModel("NO_CURRENCY");
         }
     }
 }

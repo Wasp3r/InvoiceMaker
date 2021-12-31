@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using InvoiceMakerCore.Annotations.Builders;
 using InvoiceMakerCore.Models;
 using InvoiceMakerTests.MockHelpers;
 using NUnit.Framework;
@@ -24,9 +23,7 @@ namespace InvoiceMakerTests.DataAccessTests
         [Test]
         public void InvalidUnitCreationTest()
         {
-            var invalidUnit = new UnitBuilder()
-                .AddName("NO_UNIT")
-                .Build();
+            var invalidUnit = new UnitModel("NO_UNIT");
             DataAccess.UnitsManager.Add(invalidUnit);
             DataAccess.UnitsManager.Add(DataObjectsMock.MockUnit(1));
             
