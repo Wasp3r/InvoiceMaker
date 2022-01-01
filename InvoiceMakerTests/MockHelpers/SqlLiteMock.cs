@@ -1,7 +1,9 @@
 ﻿using System.IO;
+using System.Threading;
 using Autofac;
 using InvoiceMakerCore.Managers.DataManagement;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceMakerTests.MockHelpers
 {
@@ -15,11 +17,11 @@ namespace InvoiceMakerTests.MockHelpers
             var builder = new ContainerBuilder();
             builder.RegisterType<SqlLiteDataBaseAccess>()
                 .As<IDataBaseAccess>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
             builder.RegisterType<DataAccess>().AsSelf();
             
             _container = builder.Build();
-            _container.Resolve<IDataBaseAccess>().Connect($"{TestPathUtils.TempPath}\\test.db");
+            GetDataBase().Connect($"{TestPathUtils.TempPath}\\test.db");
         }
 
         public static DataAccess GetDataAccess()
