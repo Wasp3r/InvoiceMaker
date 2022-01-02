@@ -19,5 +19,21 @@ namespace InvoiceMakerCore.Managers.DataManagement
         {
             base.SaveChanges();
         }
+
+        public virtual void DropDatabase()
+        {
+            Database.EnsureDeleted();
+        }
+
+        public virtual void ClearDatabase()
+        {
+            InvoiceProductEntries.RemoveRange(InvoiceProductEntries);
+            Invoices.RemoveRange(Invoices);
+            Currencies.RemoveRange(Currencies);
+            Units.RemoveRange(Units);
+            Products.RemoveRange(Products);
+            Clients.RemoveRange(Clients);
+            SaveChanges();
+        }
     }
 }

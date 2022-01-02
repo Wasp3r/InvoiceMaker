@@ -15,10 +15,10 @@ namespace InvoiceMakerTests.DataAccessTests
             DataAccess = SqlLiteMock.GetDataAccess();
         }
 
-        [OneTimeTearDown]
-        public void CleanUp()
+        [TearDown]
+        public void DropDataBase()
         {
-            SqlLiteMock.CleanUp();
+            SqlLiteMock.GetDataBase().DropDatabase();
         }
     }
 }
