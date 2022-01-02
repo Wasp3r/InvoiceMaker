@@ -12,8 +12,20 @@ namespace InvoiceMakerCore.Managers.DataManagement
         public DbSet<InvoiceProductEntryModel> InvoiceProductEntries { get; set; }
         public DbSet<CurrencyModel> Currencies { get; set; }
         public DbSet<UnitModel> Units { get; set; }
-        
-        public virtual void Connect(string connectionString) { }
+
+        protected string ConnectionString;
+
+        public virtual void Connect(string connectionString)
+        {
+            ConnectionString = connectionString;
+            Database.EnsureCreated();
+            Database.OpenConnection();
+        }
+
+        public virtual void Disconnect()
+        {
+            Database.CloseConnection();
+        }
 
         public virtual void SaveChanges()
         {

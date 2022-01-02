@@ -19,11 +19,5 @@ namespace InvoiceMakerTests.MockHelpers
             _container = builder.Build();
             _container.Resolve<IDataBaseAccess>().Connect($"Server=(localdb)\\mssqllocaldb;Database={TestPathUtils.TempPath}\\test; Trusted_Connection=True;");
         }
-
-        public override void CleanUp()
-        {
-            if (!Directory.Exists(TestPathUtils.TempPath)) return;
-            Directory.Delete(TestPathUtils.TempPath, true);
-        }
     }
 }

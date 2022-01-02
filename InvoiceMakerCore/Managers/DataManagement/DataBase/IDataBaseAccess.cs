@@ -13,6 +13,8 @@ namespace InvoiceMakerCore.Managers.DataManagement.DataBase
 
         public void Connect(string connectionString);
 
+        public void Disconnect();
+
         public void SaveChanges();
 
         public void DropDatabase();

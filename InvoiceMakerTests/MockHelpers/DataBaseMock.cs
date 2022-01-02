@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.IO;
+using Autofac;
 using InvoiceMakerCore.Managers.DataManagement;
 using InvoiceMakerCore.Managers.DataManagement.DataBase;
 
@@ -19,6 +20,11 @@ namespace InvoiceMakerTests.MockHelpers
         }
 
         public abstract void SetupContainer();
-        public abstract void CleanUp();
+
+        public virtual void CleanUp()
+        {
+            if (!Directory.Exists(TestPathUtils.TempPath)) return;
+            Directory.Delete(TestPathUtils.TempPath, true);
+        }
     }
 }

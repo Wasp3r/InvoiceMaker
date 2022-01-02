@@ -14,24 +14,27 @@ namespace InvoiceMakerTests.SqlLite
     public class SqlLiteMockupSetup
     {
         internal IDataBaseAccess DataBaseAccess;
-        
+        private DataBaseMock _dataBaseMock;
+
         [OneTimeSetUp]
         public void Setup()
         {
-            SqlLiteMock.SetupContainer();
-            DataBaseAccess = SqlLiteMock.GetDataBase();
+            _dataBaseMock = new SqlLiteMock();
+            _dataBaseMock.SetupContainer();
+            DataBaseAccess = _dataBaseMock.GetDataBase();
         }
 
         [TearDown]
         public void DropDataBase()
         {
-            SqlLiteMock.GetDataBase().ClearDatabase();
+            DataBaseAccess.Disconnect();
+            DataBaseAccess.ClearDatabase();
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
-            SqlLiteMock.GetDataBase().DropDatabase();
+            DataBaseAccess.DropDatabase();
         }
     }
 }

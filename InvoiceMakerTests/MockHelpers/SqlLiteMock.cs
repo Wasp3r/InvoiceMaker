@@ -9,11 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceMakerTests.MockHelpers
 {
-    public static class SqlLiteMock
+    public class SqlLiteMock : DataBaseMock
     {
-        private static IContainer _container;
-        
-        public static void SetupContainer()
+        public override void SetupContainer()
         {
             CleanUp();
             var builder = new ContainerBuilder();
@@ -23,23 +21,7 @@ namespace InvoiceMakerTests.MockHelpers
             builder.RegisterType<DataAccess>().AsSelf();
             
             _container = builder.Build();
-            GetDataBase().Connect($"{TestPathUtils.TempPath}\\test.db");
-        }
-
-        public static DataAccess GetDataAccess()
-        {
-            return _container.Resolve<DataAccess>();
-        }
-
-        public static IDataBaseAccess GetDataBase()
-        {
-            return _container.Resolve<IDataBaseAccess>();
-        }
-
-        public static void CleanUp()
-        {
-            if (!Directory.Exists(TestPathUtils.TempPath)) return;
-            Directory.Delete(TestPathUtils.TempPath, true);
+            GetDataBase().Connect($"Data Source={TestPathUtils.TempPath}\\test.db");
         }
     }
 }
