@@ -1,0 +1,45 @@
+﻿<Page x:Class="InvoiceMaker.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InvoiceMaker.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="700"
+      Title="Login Page">
+
+    <Border>
+        <Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+
+                <StackPanel
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    TextBlock.TextAlignment="Center">
+
+                    <Border
+                        Background="{StaticResource Foreground_ChampagnePinkBrush}"
+                        CornerRadius="10"
+                        Padding="15 50 15 15"
+                        Width="330"
+                        Margin="50 50 50 0">
+
+                        <StackPanel>
+
+                            <TextBlock
+                                Text="Sign In"
+                                FontSize="{StaticResource FontSizeTitle}"
+                                FontFamily="{StaticResource LatoBold}"
+                                Foreground="{StaticResource FrenchLiliacBrush}"
+                                />
+
+                        </StackPanel>
+                        
+                    </Border>
+                    
+                </StackPanel>
+                
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Page>

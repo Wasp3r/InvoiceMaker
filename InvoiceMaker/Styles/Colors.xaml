@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="SeaShell">#E7CFBC</Color>
+    <SolidColorBrush x:Key="Background_SeaShellBrush" Color="{StaticResource SeaShell}"/>
+
+    <Color x:Key="ChampagnePink">#FFF4EC</Color>
+    <SolidColorBrush x:Key="Foreground_ChampagnePinkBrush" Color="{StaticResource ChampagnePink}"/>
+
+    <Color x:Key="FrenchLiliac">#966B9D</Color>
+    <SolidColorBrush x:Key="FrenchLiliacBrush" Color="{StaticResource FrenchLiliac}"/>
+
+    <Color x:Key="MellowApricot">#F2B880</Color>
+    <SolidColorBrush x:Key="MellowApricotBrush" Color="{StaticResource MellowApricot}"/>
+
+    <Color x:Key="OldRose">#C98686</Color>
+    <SolidColorBrush x:Key="OldRoseBrush" Color="{StaticResource OldRose}"/>
+
+</ResourceDictionary>
