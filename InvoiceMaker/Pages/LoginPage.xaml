@@ -12,26 +12,40 @@
         <Grid>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
-                <StackPanel
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    TextBlock.TextAlignment="Center">
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            TextBlock.TextAlignment="Center">
 
-                    <Border
-                        Background="{StaticResource Foreground_ChampagnePinkBrush}"
-                        CornerRadius="10"
-                        Padding="15 50 15 15"
-                        Width="330"
-                        Margin="50 50 50 0">
+                    <Border Background="{StaticResource Foreground_ChampagnePinkBrush}"
+                            CornerRadius="10"
+                            Padding="15 50 15 15"
+                            Width="330"
+                            Margin="50 50 50 0">
 
                         <StackPanel>
 
-                            <TextBlock
-                                Text="Sign In"
-                                FontSize="{StaticResource FontSizeTitle}"
-                                FontFamily="{StaticResource LatoBold}"
-                                Foreground="{StaticResource FrenchLiliacBrush}"
-                                />
+                            <TextBlock Text="Sign In"
+                                        FontSize="{StaticResource FontSizeTitle}"
+                                        FontFamily="{StaticResource LatoBold}"
+                                        Foreground="{StaticResource PaleRedBrush}"/>
+                            
+                            <TextBlock Text="Dotty Invoice"
+                                       FontSize="{StaticResource FontSizeSmall}"
+                                       FontFamily="{StaticResource LatoStandard}"
+                                       Foreground="{StaticResource PaleRedBrush}"/>
+
+                            <TextBox Tag="Login"
+                                     Text="{Binding Login}"
+                                     Margin="0 10 0 5"/>
+
+                            <PasswordBox x:Name="PasswordText"
+                                         Tag="Password"
+                                         Margin="0 0 0 20"/>
+
+                            <Button Content="Login"
+                                    Command="{Binding LoginCommand}"
+                                    HorizontalAlignment="Center"
+                                    IsDefault="True"/>
 
                         </StackPanel>
                         
