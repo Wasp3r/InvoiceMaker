@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:InvoiceMaker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
 
-    </Grid>
+    <Border Background="{StaticResource Background_SeaShellBrush}">
+        <Grid>
+            <Frame x:Name="CurrentPage"/>
+        </Grid>
+    </Border>
 </Window>

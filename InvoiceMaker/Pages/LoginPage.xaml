@@ -1,12 +1,14 @@
-﻿<Page x:Class="InvoiceMaker.Pages.LoginPage"
+﻿<local:BasePage x:TypeArguments="core:LoginViewModel"
+      x:Class="InvoiceMaker.Pages.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InvoiceMaker.Pages"
+      xmlns:core="clr-namespace:InvoiceMakerCore.ViewModels;assembly=InvoiceMakerCore"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="700"
-      Title="Login Page">
+      >
 
     <Border>
         <Grid>
@@ -35,7 +37,8 @@
                                        Foreground="{StaticResource PaleRedBrush}"/>
 
                             <TextBox Tag="Login"
-                                     Text="{Binding Login}"
+                                     Text="{Binding Email}"
+                                     d:Text=""
                                      Margin="0 10 0 5"/>
 
                             <PasswordBox x:Name="PasswordText"
@@ -48,12 +51,10 @@
                                     IsDefault="True"/>
 
                         </StackPanel>
-                        
                     </Border>
-                    
                 </StackPanel>
                 
             </ScrollViewer>
         </Grid>
     </Border>
-</Page>
+</local:BasePage>
