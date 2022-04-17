@@ -1,13 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:invoiceMaker="clr-namespace:InvoiceMaker">
+                    xmlns:invoiceMaker="clr-namespace:InvoiceMaker"
+                    xmlns:local="clr-namespace:InvoiceMaker"
+                    xmlns:attachedProperties="clr-namespace:InvoiceMaker.AttachedProperties"
+                    xmlns:converters="clr-namespace:InvoiceMaker.Converters">
     
     <!--Basic text box-->
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
 
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
         <Setter Property="BorderBrush" Value="{StaticResource DarkPurpleBrush}"/>
-        <Setter Property="BorderThickness" Value="0 0 0 1"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1.5"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -44,6 +47,19 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource LightPurpleBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource DarkPurpleBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
 
@@ -57,9 +73,9 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
         <Setter Property="Margin" Value="0 5 0 5"/>
         <Setter Property="BorderBrush" Value="{StaticResource DarkPurpleBrush}"/>
-        <Setter Property="BorderThickness" Value="0 0 0 1"/>
-
-        <Setter Property="invoiceMaker:MonitorPasswordProperty.Value" Value="True"/>
+        <Setter Property="BorderThickness" Value="0 0 0 1.5"/>
+        
+        <Setter Property="attachedProperties:MonitorPasswordProperty.Value" Value="True"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -83,9 +99,23 @@
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                        Foreground="{StaticResource DarkGrayBrush}"
-                                       Visibility="{TemplateBinding local:HasTextProperty.Value}"/>
+                                       Visibility="{TemplateBinding attachedProperties:PasswordBoxHasTextProperty.Value,
+                                       Converter={converters:BoolToVisibilityConverter}}"/>
                         
                     </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource LightPurpleBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource DarkPurpleBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

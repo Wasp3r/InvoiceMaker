@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace InvoiceMakerCore.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         public string Email { get; set; }
+        public SecureString Password { get; set; }
         public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()

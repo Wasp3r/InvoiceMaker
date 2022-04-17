@@ -12,7 +12,7 @@
 
     <Color x:Key="ChampagnePink">#FFF4EC</Color>
     <SolidColorBrush x:Key="Foreground_ChampagnePinkBrush" Color="{StaticResource ChampagnePink}"/>
-
+    
     <Color x:Key="DarkPurple">#966B9D</Color>
     <SolidColorBrush x:Key="DarkPurpleBrush" Color="{StaticResource DarkPurple}"/>
 
